@@ -13,8 +13,8 @@ public class MovimientoJugadora : MonoBehaviour
     bool isJumping = false;
     [Range(1, 500)] public float potenciaSalto;
 
-    //Variable para puntuacion de powerUp
-    public int puntuacion;
+    //Variable para vida de powerUp
+    [Range(0, 5)] public int vida;
 
     // Start is called before the first frame update
     void Start()
@@ -42,16 +42,17 @@ public class MovimientoJugadora : MonoBehaviour
             spRd.flipX = true;
 
         //Control de la animación
-        /*if (movimientoH != 0)
+        if (movimientoH != 0)
             animator.SetBool("isWalking", true);
         else
-            animator.SetBool("isWalking", false);*/
+            animator.SetBool("isWalking", false);
 
         //Para el salto
         if (Input.GetButton("Jump") && !isJumping)
         {
             rb2d.AddForce(Vector2.up * potenciaSalto);
             isJumping = true;
+            animator.SetBool("isJumping", isJumping);
         }
     }
 
@@ -62,11 +63,17 @@ public class MovimientoJugadora : MonoBehaviour
         {
             isJumping = false;
             rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
+            animator.SetBool("isJumping", isJumping);
         }
     }
 
-    public void IncrementarPuntos(int cantidad)
+    public void IncrementarVida(int cantidad)
     {
-        puntuacion += cantidad;
+        vida += cantidad;
+    }
+
+    public void DecrementarVida(int cantidad)
+    {
+        vida -= cantidad;
     }
 }
