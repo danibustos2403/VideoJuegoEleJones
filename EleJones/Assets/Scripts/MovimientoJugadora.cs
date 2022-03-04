@@ -15,6 +15,7 @@ public class MovimientoJugadora : MonoBehaviour
 
     //Variable para vida de powerUp
     [Range(0, 5)] public int vida;
+    public bool vulnerable; //indica cuando estamos vulnerables
 
     // Start is called before the first frame update
     void Start()
@@ -74,6 +75,24 @@ public class MovimientoJugadora : MonoBehaviour
 
     public void DecrementarVida(int cantidad)
     {
-        vida -= cantidad;
+        if (vulnerable)
+        {
+            vida -= cantidad;
+
+            if(vida == 0)
+            {
+                //FinJuego()
+                //Mecanica morirse
+            }
+
+            Invoke("HacerVulnerable", 1f);
+            spRd.color = Color.red;
+        }   
+    }
+
+    private void HacerVulnerable()
+    {
+        vulnerable = true;
+        spRd.color = Color.white;
     }
 }
