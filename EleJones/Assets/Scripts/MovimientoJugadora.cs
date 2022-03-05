@@ -23,6 +23,7 @@ public class MovimientoJugadora : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         spRd = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        animator.SetBool("isDead", false);
     }
 
     // Update is called once per frame
@@ -81,7 +82,8 @@ public class MovimientoJugadora : MonoBehaviour
 
             if(vida == 0)
             {
-                //FinJuego()
+                animator.SetBool("isDead", true);
+                Invoke("ReanudarPartida", 3f);
                 //Mecanica morirse
             }
 
@@ -94,5 +96,11 @@ public class MovimientoJugadora : MonoBehaviour
     {
         vulnerable = true;
         spRd.color = Color.white;
+    }
+
+    private void ReanudarPartida()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        Time.timeScale = 1f;
     }
 }
