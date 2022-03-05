@@ -6,11 +6,11 @@ public class quitarVida : MonoBehaviour
 {
     public int cantidad;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collider)
     {
-        if (collision.CompareTag("Player"))
+        if (collider.CompareTag("Player") && collider.gameObject.GetComponent<MovimientoJugadora>().vulnerable)
         {
-            collision.gameObject.GetComponent<MovimientoJugadora>().DecrementarVida(cantidad);
+            collider.gameObject.GetComponent<MovimientoJugadora>().DecrementarVida(cantidad);
         }
     }
 }

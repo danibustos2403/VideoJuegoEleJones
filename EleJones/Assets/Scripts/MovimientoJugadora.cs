@@ -12,10 +12,16 @@ public class MovimientoJugadora : MonoBehaviour
     private Animator animator;
     bool isJumping = false;
     [Range(1, 500)] public float potenciaSalto;
+    public float gemas;
 
     //Variable para vida de powerUp
     [Range(0, 5)] public int vida;
     public bool vulnerable; //indica cuando estamos vulnerables
+    bool isDead;
+
+    //Para atacar en melee
+    public bool isMelee;
+    public bool tengoCuchillo;
 
     // Start is called before the first frame update
     void Start()
@@ -24,37 +30,57 @@ public class MovimientoJugadora : MonoBehaviour
         spRd = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         animator.SetBool("isDead", false);
+        vulnerable = true;
+        gemas = 0;
+        tengoCuchillo = false;
+        isMelee = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-
     }
+
 
     private void FixedUpdate()
     {
-        float movimientoH = Input.GetAxisRaw("Horizontal");
-        rb2d.velocity = new Vector2(movimientoH * speed, rb2d.velocity.y);
-
-        //Control de la dirección del muñeco
-        if (movimientoH > 0)
-            spRd.flipX = false;
-        else if (movimientoH < 0)
-            spRd.flipX = true;
-
-        //Control de la animación
-        if (movimientoH != 0)
-            animator.SetBool("isWalking", true);
-        else
-            animator.SetBool("isWalking", false);
-
-        //Para el salto
-        if (Input.GetButton("Jump") && !isJumping)
+        if (!isDead)
         {
-            rb2d.AddForce(Vector2.up * potenciaSalto);
-            isJumping = true;
-            animator.SetBool("isJumping", isJumping);
+            float movimientoH = Input.GetAxisRaw("Horizontal");
+            rb2d.velocity = new Vector2(movimientoH * speed, rb2d.velocity.y);
+            
+            //Control de la dirección del muñeco
+            if (movimientoH > 0)
+                spRd.flipX = false;
+            else if (movimientoH < 0)
+                spRd.flipX = true;
+
+            //Control de la animación
+            if (movimientoH != 0)
+                animator.SetBool("isWalking", true);
+            else
+                animator.SetBool("isWalking", false);
+
+            //Para el salto
+            if (Input.GetButton("Jump") && !isJumping)
+            {
+                rb2d.AddForce(Vector2.up * potenciaSalto);
+                isJumping = true;
+                animator.SetBool("isJumping", isJumping);
+            }
+
+
+            //Para usar el cuchillo
+            if (Input.GetButton("Fire1") && tengoCuchillo) //pulso la tecla CTRL
+            {
+                isMelee = true;
+                animator.SetBool("isMelee", isMelee);
+                Invoke("PararMelee", 2.5f);
+            }
+        }
+        else
+        {
+            rb2d.velocity = new Vector2(0, rb2d.velocity.y);
         }
     }
 
@@ -76,19 +102,22 @@ public class MovimientoJugadora : MonoBehaviour
 
     public void DecrementarVida(int cantidad)
     {
-        if (vulnerable)
+        if (vulnerable && !isDead)
         {
+            vulnerable = false;
             vida -= cantidad;
 
-            if(vida == 0)
+            if(vida <= 0)
             {
-                animator.SetBool("isDead", true);
-                Invoke("ReanudarPartida", 3f);
-                //Mecanica morirse
+                isDead = true;
+                animator.SetBool("isDead", isDead);
+                Invoke("ReanudarPartida", 2.5f);
             }
-
-            Invoke("HacerVulnerable", 1f);
-            spRd.color = Color.red;
+            else
+            {
+                Invoke("HacerVulnerable", 1f);
+                spRd.color = Color.red;
+            }
         }   
     }
 
@@ -100,7 +129,24 @@ public class MovimientoJugadora : MonoBehaviour
 
     private void ReanudarPartida()
     {
+        isDead = false;
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
         Time.timeScale = 1f;
+    }
+
+    public void IncrementarGemas(int cantidad)
+    {
+        gemas += cantidad;
+    }
+
+    public void CogerCuchillo()
+    {
+        tengoCuchillo = true;
+    }
+
+    private void PararMelee()
+    {
+        isMelee = false;
+        animator.SetBool("isMelee", isMelee);
     }
 }
