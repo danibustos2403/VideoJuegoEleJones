@@ -23,24 +23,36 @@ public class MovimientoJugadora : MonoBehaviour
     public bool isMelee;
     public bool tengoCuchillo;
 
+    //Control del canvas
+    public Canvas canvas;
+    private ControlHUD hud;
+
     // Start is called before the first frame update
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         spRd = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-        animator.SetBool("isDead", false);
-        vulnerable = true;
-        gemas = 0;
+
+        animator.SetBool("isDead", false); //Asignamos a false la variable isDead para no activar la animacion de morir
+        vulnerable = true; //Vulnerable = true para que pueda ser dañado
+        gemas = 0; //inicializamos las gemas
+
+        //Animación acuchillar
         tengoCuchillo = false;
         isMelee = false;
+
+        //Control del canvas
+        hud = canvas.GetComponent<ControlHUD>();
+        hud.setVidasTxt(vida); //Control de vidas del HUD
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Control de powerUps del HUD
+        hud.setPowerUpTxt(GameObject.FindGameObjectsWithTag("Diamond").Length);
     }
-
 
     private void FixedUpdate()
     {
@@ -98,6 +110,7 @@ public class MovimientoJugadora : MonoBehaviour
     public void IncrementarVida(int cantidad)
     {
         vida += cantidad;
+        hud.setVidasTxt(vida); //Actualizamos vidas del HUD
     }
 
     public void DecrementarVida(int cantidad)
@@ -118,7 +131,9 @@ public class MovimientoJugadora : MonoBehaviour
                 Invoke("HacerVulnerable", 1f);
                 spRd.color = Color.red;
             }
-        }   
+        }
+        //Actualizamos vidas del HUD
+        hud.setVidasTxt(vida);
     }
 
     private void HacerVulnerable()

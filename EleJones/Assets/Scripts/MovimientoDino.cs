@@ -43,19 +43,17 @@ public class MovimientoDino : MonoBehaviour
             if (transform.position == posicionFin)
             {
                 movimientoAFin = false;
-                if (voltearse)
-                    spRd.flipX = false;
+                //Verificamos si tenemos que girar
+                if (voltearse) spRd.flipX = false;
             }
-
 
             if (transform.position == posicionInicio)
             {
                 movimientoAFin = true;
-                if (voltearse)
-                    spRd.flipX = true;
+                //Verificamos si tenemos que girar
+                if (voltearse) spRd.flipX = true;
             }
         }
-       
     }
 
     private void OnTriggerStay2D(Collider2D collider)
