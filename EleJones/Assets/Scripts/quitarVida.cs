@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class quitarVida : MonoBehaviour
 {
-    public int cantidad;
 
     private void OnTriggerStay2D(Collider2D collider)
     {
         if (collider.CompareTag("Player") && collider.gameObject.GetComponent<MovimientoJugadora>().vulnerable)
         {
-            collider.gameObject.GetComponent<MovimientoJugadora>().DecrementarVida(cantidad);
+            collider.gameObject.GetComponent<MovimientoJugadora>().DecrementarVida();
         }
     }
 }

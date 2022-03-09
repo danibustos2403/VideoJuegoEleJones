@@ -66,7 +66,7 @@ public class MovimientoDino : MonoBehaviour
         }
         else if (collider.gameObject.CompareTag("Player") && collider.gameObject.GetComponent<MovimientoJugadora>().vulnerable && !isDead)
         {
-            collider.gameObject.GetComponent<MovimientoJugadora>().DecrementarVida(1);
+            collider.gameObject.GetComponent<MovimientoJugadora>().DecrementarVida();
         }
 
     }

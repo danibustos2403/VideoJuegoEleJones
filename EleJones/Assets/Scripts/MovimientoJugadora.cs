@@ -27,6 +27,9 @@ public class MovimientoJugadora : MonoBehaviour
     public Canvas canvas;
     private ControlHUD hud;
 
+    //Control objeto GameManager, para el control de vidas al cambiar de escena
+    private GameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,9 +45,13 @@ public class MovimientoJugadora : MonoBehaviour
         tengoCuchillo = false;
         isMelee = false;
 
+        //Control de vidas con el game manager
+        gameManager = FindObjectOfType<GameManager>();
+
         //Control del canvas
         hud = canvas.GetComponent<ControlHUD>();
-        hud.setVidasTxt(vida); //Control de vidas del HUD
+        //hud.setVidasTxt(vida); //Control de vidas del HUD, sin el GameManager
+        hud.setVidasTxt(gameManager.getVidas());
     }
 
     // Update is called once per frame
@@ -109,18 +116,18 @@ public class MovimientoJugadora : MonoBehaviour
 
     public void IncrementarVida(int cantidad)
     {
-        vida += cantidad;
-        hud.setVidasTxt(vida); //Actualizamos vidas del HUD
+        gameManager.aumentarVidas();
+        hud.setVidasTxt(gameManager.getVidas()); //Actualizamos vidas del HUD
     }
 
-    public void DecrementarVida(int cantidad)
+    public void DecrementarVida()
     {
         if (vulnerable && !isDead)
         {
             vulnerable = false;
-            vida -= cantidad;
+            gameManager.decrementarVidas();
 
-            if(vida <= 0)
+            if(gameManager.getVidas() <= 0)
             {
                 isDead = true;
                 animator.SetBool("isDead", isDead);
@@ -133,7 +140,7 @@ public class MovimientoJugadora : MonoBehaviour
             }
         }
         //Actualizamos vidas del HUD
-        hud.setVidasTxt(vida);
+        hud.setVidasTxt(gameManager.getVidas());
     }
 
     private void HacerVulnerable()
