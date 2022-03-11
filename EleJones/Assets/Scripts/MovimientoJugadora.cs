@@ -30,6 +30,9 @@ public class MovimientoJugadora : MonoBehaviour
     //Control objeto GameManager, para el control de vidas al cambiar de escena
     private GameManager gameManager;
 
+    //Control joystick
+    public Joystick joystick;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -67,7 +70,17 @@ public class MovimientoJugadora : MonoBehaviour
     {
         if (!isDead)
         {
-            float movimientoH = Input.GetAxisRaw("Horizontal");
+            //float movimientoH = Input.GetAxisRaw("Horizontal");
+
+            //Movimiento con joystick
+            float movimientoH;
+            
+            if((joystick.Horizontal >= .2f) || (joystick.Horizontal <= -.2f))
+                movimientoH = joystick.Horizontal;
+            else
+                movimientoH = 0f;
+            
+
             rb2d.velocity = new Vector2(movimientoH * speed, rb2d.velocity.y);
             
             //Control de la dirección del muñeco
@@ -83,7 +96,9 @@ public class MovimientoJugadora : MonoBehaviour
                 animator.SetBool("isWalking", false);
 
             //Para el salto
-            if (Input.GetButton("Jump") && !isJumping)
+            float movimientoV = joystick.Vertical;
+            //if (Input.GetButton("Jump") && !isJumping)
+            if(movimientoV >= .5f && !isJumping)
             {
                 rb2d.AddForce(Vector2.up * potenciaSalto);
                 isJumping = true;
@@ -177,5 +192,13 @@ public class MovimientoJugadora : MonoBehaviour
     {
         isMelee = false;
         animator.SetBool("isMelee", isMelee);
+    }
+
+    //Control acción botón
+    public void accionBoton()
+    {
+        isMelee = true;
+        animator.SetBool("isMelee", isMelee);
+        Invoke("PararMelee", 2.5f);
     }
 }
