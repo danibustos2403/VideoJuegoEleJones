@@ -10,6 +10,7 @@ public class ControlMenu : MonoBehaviour
     public void OnButtonJugar()
     {
         gameManager = FindObjectOfType<GameManager>();
+        
         gameManager.inicializarVidas();
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1); //Carga la escena que viene a continuación

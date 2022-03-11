@@ -59,6 +59,8 @@ public class MovimientoJugadora : MonoBehaviour
     {
         //Control de powerUps del HUD
         hud.setPowerUpTxt(GameObject.FindGameObjectsWithTag("Diamond").Length);
+
+
     }
 
     private void FixedUpdate()
@@ -132,6 +134,11 @@ public class MovimientoJugadora : MonoBehaviour
                 isDead = true;
                 animator.SetBool("isDead", isDead);
                 Invoke("ReanudarPartida", 2.5f);
+
+                if (gameManager.getVidas() == 0)
+                {
+                    gameManager.TerminarJuego(false);
+                }
             }
             else
             {
