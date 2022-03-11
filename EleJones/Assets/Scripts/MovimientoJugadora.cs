@@ -33,6 +33,9 @@ public class MovimientoJugadora : MonoBehaviour
     //Control joystick
     public Joystick joystick;
 
+    //Control boton acuchillar
+    private GameObject botonMelee;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +50,8 @@ public class MovimientoJugadora : MonoBehaviour
         //Animación acuchillar
         tengoCuchillo = false;
         isMelee = false;
+        botonMelee = GameObject.Find("BtnMelee");
+        botonMelee.SetActive(false);
 
         //Control de vidas con el game manager
         gameManager = FindObjectOfType<GameManager>();
@@ -62,8 +67,6 @@ public class MovimientoJugadora : MonoBehaviour
     {
         //Control de powerUps del HUD
         hud.setPowerUpTxt(GameObject.FindGameObjectsWithTag("Diamond").Length);
-
-
     }
 
     private void FixedUpdate()
@@ -96,6 +99,7 @@ public class MovimientoJugadora : MonoBehaviour
                 animator.SetBool("isWalking", false);
 
             //Para el salto
+            /**
             float movimientoV = joystick.Vertical;
             //if (Input.GetButton("Jump") && !isJumping)
             if(movimientoV >= .5f && !isJumping)
@@ -104,7 +108,10 @@ public class MovimientoJugadora : MonoBehaviour
                 isJumping = true;
                 animator.SetBool("isJumping", isJumping);
             }
+            */
 
+            if (tengoCuchillo)
+                botonMelee.SetActive(true);
 
             //Para usar el cuchillo
             if (Input.GetButton("Fire1") && tengoCuchillo) //pulso la tecla CTRL
@@ -194,11 +201,21 @@ public class MovimientoJugadora : MonoBehaviour
         animator.SetBool("isMelee", isMelee);
     }
 
-    //Control acción botón
-    public void accionBoton()
+    //Boton acuchillar
+    public void btnMelee()
     {
         isMelee = true;
         animator.SetBool("isMelee", isMelee);
         Invoke("PararMelee", 2.5f);
+    }
+    //Boton salto
+    public void btnJump()
+    {
+        if (!isJumping)
+        {
+            rb2d.AddForce(Vector2.up * potenciaSalto);
+            isJumping = true;
+            animator.SetBool("isJumping", isJumping);
+        }
     }
 }
