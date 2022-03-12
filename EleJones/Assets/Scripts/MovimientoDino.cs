@@ -75,4 +75,11 @@ public class MovimientoDino : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    public void DinoDisparado()
+    {
+        Invoke("DinoDesaparece", 3f);
+        isDead = true;
+        animator.SetBool("isDead", isDead);
+    }
 }

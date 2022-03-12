@@ -36,6 +36,10 @@ public class MovimientoJugadora : MonoBehaviour
     //Control boton acuchillar
     private GameObject botonMelee;
 
+    //Control del disparo
+    public GameObject ShootPrefab;
+    public bool isShooting;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -60,6 +64,9 @@ public class MovimientoJugadora : MonoBehaviour
         hud = canvas.GetComponent<ControlHUD>();
         //hud.setVidasTxt(vida); //Control de vidas del HUD, sin el GameManager
         hud.setVidasTxt(gameManager.getVidas());
+
+        //Animación disparar
+        isShooting = false;
     }
 
     // Update is called once per frame
@@ -113,13 +120,14 @@ public class MovimientoJugadora : MonoBehaviour
             if (tengoCuchillo)
                 botonMelee.SetActive(true);
 
+            /*
             //Para usar el cuchillo
             if (Input.GetButton("Fire1") && tengoCuchillo) //pulso la tecla CTRL
             {
                 isMelee = true;
                 animator.SetBool("isMelee", isMelee);
                 Invoke("PararMelee", 2.5f);
-            }
+            }*/
         }
         else
         {
@@ -155,12 +163,7 @@ public class MovimientoJugadora : MonoBehaviour
             {
                 isDead = true;
                 animator.SetBool("isDead", isDead);
-                Invoke("ReanudarPartida", 2.5f);
-
-                if (gameManager.getVidas() == 0)
-                {
-                    gameManager.TerminarJuego(false);
-                }
+                Invoke("TerminarPartida", 2f);
             }
             else
             {
@@ -190,6 +193,7 @@ public class MovimientoJugadora : MonoBehaviour
         gemas += cantidad;
     }
 
+    //Para activar la mecanica acuchillar
     public void CogerCuchillo()
     {
         tengoCuchillo = true;
@@ -206,8 +210,9 @@ public class MovimientoJugadora : MonoBehaviour
     {
         isMelee = true;
         animator.SetBool("isMelee", isMelee);
-        Invoke("PararMelee", 2.5f);
+        Invoke("PararMelee", 0.5f);
     }
+
     //Boton salto
     public void btnJump()
     {
@@ -218,4 +223,40 @@ public class MovimientoJugadora : MonoBehaviour
             animator.SetBool("isJumping", isJumping);
         }
     }
+
+    //Boton disparar
+    public void btnShoot()
+    {
+        //Animación
+        isShooting = true;
+        animator.SetBool("isShooting", isShooting);
+        Invoke("PararShoot", 0.5f);
+        Invoke("Disparar", 0.5f);
+        
+    }
+
+    //Parar animacion disparar
+    public void PararShoot()
+    {
+        isShooting = false;
+        animator.SetBool("isShooting", isShooting);
+    }
+
+    public void Disparar()
+    {
+        //Control del disparo
+        Shooting scriptShoot = ShootPrefab.GetComponent<Shooting>();
+
+        scriptShoot.Velocidad = System.Math.Abs(scriptShoot.Velocidad);
+
+        //Creamos una instancia del prefab en nuestra escena, concretamente en la posición de nuestro personaje
+        Instantiate(ShootPrefab, transform.position, Quaternion.identity);
+    }
+
+    //Terminar partida
+    private void TerminarPartida()
+    {
+        gameManager.TerminarJuego(false);
+    }
+
 }
