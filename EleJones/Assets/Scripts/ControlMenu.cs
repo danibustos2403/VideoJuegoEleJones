@@ -2,18 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ControlMenu : MonoBehaviour
 {
-    private GameManager gameManager;
-
-    public void OnButtonJugar()
+    public void OnButtonNiveles()
     {
-        gameManager = FindObjectOfType<GameManager>();
-        
-        gameManager.inicializarVidas();
-
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1); //Carga la escena que viene a continuación
+        SceneManager.LoadScene("Levels");
     }
 
     public void OnButtonCreditos()

@@ -8,7 +8,10 @@ public class GameManager : MonoBehaviour
 {
     private GameObject gameManager;
     public int vidasGlobal { get; set; }
-    private string mensajeFinal;
+    public int starsLevel1 { get; set; }
+    public int starsLevel2 { get; set; }
+    public int starsLevel3 { get; set; }
+    public bool tengoCuchillo { get; set; }
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +19,11 @@ public class GameManager : MonoBehaviour
         gameManager = GameObject.Find("GameManager");
         DontDestroyOnLoad(gameManager);
         SceneManager.LoadScene("Menu");
+        tengoCuchillo = false;
+
+        starsLevel1 = -1;
+        starsLevel2 = -1;
+        starsLevel3 = -1;
     }
 
     public void cambiarEscena(string siguienteScene)
@@ -33,11 +41,6 @@ public class GameManager : MonoBehaviour
         return vidasGlobal;
     }
 
-    public string getMensajeFinal()
-    {
-        return mensajeFinal;
-    }
-
     public void decrementarVidas()
     {
         vidasGlobal--;
@@ -49,7 +52,9 @@ public class GameManager : MonoBehaviour
 
     public void TerminarJuego(bool ganar)
     {
-        mensajeFinal = (ganar) ? "Felicidades has terminado el juego" : "Has perdido!";
-        cambiarEscena("Final");
+        if (ganar)
+            cambiarEscena("YouWin");
+        else
+            cambiarEscena("YouLose");
     }
 }

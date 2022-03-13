@@ -12,7 +12,7 @@ public class MovimientoJugadora : MonoBehaviour
     private Animator animator;
     bool isJumping = false;
     [Range(1, 500)] public float potenciaSalto;
-    public float gemas;
+    public int gemas;
 
     //Variable para vida de powerUp
     [Range(0, 5)] public int vida;
@@ -21,7 +21,6 @@ public class MovimientoJugadora : MonoBehaviour
 
     //Para atacar en melee
     public bool isMelee;
-    public bool tengoCuchillo;
 
     //Control del canvas
     public Canvas canvas;
@@ -51,14 +50,14 @@ public class MovimientoJugadora : MonoBehaviour
         vulnerable = true; //Vulnerable = true para que pueda ser dañado
         gemas = 0; //inicializamos las gemas
 
-        //Animación acuchillar
-        tengoCuchillo = false;
-        isMelee = false;
-        botonMelee = GameObject.Find("BtnMelee");
-        botonMelee.SetActive(false);
-
         //Control de vidas con el game manager
         gameManager = FindObjectOfType<GameManager>();
+
+        //Animación acuchillar
+        isMelee = false;
+        botonMelee = GameObject.Find("BtnMelee");
+        if (!gameManager.tengoCuchillo)
+            botonMelee.SetActive(false);
 
         //Control del canvas
         hud = canvas.GetComponent<ControlHUD>();
@@ -73,7 +72,11 @@ public class MovimientoJugadora : MonoBehaviour
     void Update()
     {
         //Control de powerUps del HUD
-        hud.setPowerUpTxt(GameObject.FindGameObjectsWithTag("Diamond").Length);
+
+        //Para contar las gemas del nivel:
+        //hud.setPowerUpTxt(GameObject.FindGameObjectsWithTag("Diamond").Length);
+
+        hud.setPowerUpTxt(gemas);
     }
 
     private void FixedUpdate()
@@ -117,7 +120,7 @@ public class MovimientoJugadora : MonoBehaviour
             }
             */
 
-            if (tengoCuchillo)
+            if (gameManager.tengoCuchillo)
                 botonMelee.SetActive(true);
 
             /*
@@ -196,7 +199,7 @@ public class MovimientoJugadora : MonoBehaviour
     //Para activar la mecanica acuchillar
     public void CogerCuchillo()
     {
-        tengoCuchillo = true;
+        gameManager.tengoCuchillo = true;
     }
 
     private void PararMelee()
@@ -216,7 +219,7 @@ public class MovimientoJugadora : MonoBehaviour
     //Boton salto
     public void btnJump()
     {
-        if (!isJumping)
+        if (!isJumping && !isDead)
         {
             rb2d.AddForce(Vector2.up * potenciaSalto);
             isJumping = true;
@@ -257,6 +260,16 @@ public class MovimientoJugadora : MonoBehaviour
     private void TerminarPartida()
     {
         gameManager.TerminarJuego(false);
+
     }
 
+
+    private void OnTriggerStay2D(Collider2D collider)
+    {
+        if (collider.gameObject.CompareTag("Meta"))
+        {
+            PlayerPrefs.SetInt("Gemas", gemas);
+            gameManager.TerminarJuego(true);
+        }
+    }
 }

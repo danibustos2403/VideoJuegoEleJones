@@ -12,12 +12,12 @@ public class ControlHUD : MonoBehaviour
     //Especificar vidas
     public void setVidasTxt(int vidas)
     {
-        vidasTxt.text = "Vidas: " + vidas;
+        vidasTxt.text = "Life: " + vidas;
     }
 
     //Especificar powerUps
     public void setPowerUpTxt(int puntos)
     {
-        powerUpsText.text = "Puntos: " + puntos;
+        powerUpsText.text = "Gems: " + puntos + " / 3";
     }
 }
