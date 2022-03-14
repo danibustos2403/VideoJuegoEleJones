@@ -31,6 +31,8 @@ public class MovimientoJugadora : MonoBehaviour
 
     //Control joystick
     public Joystick joystick;
+    //Movimiento con joystick
+    private float movimientoH;
 
     //Control boton acuchillar
     private GameObject botonMelee;
@@ -85,9 +87,7 @@ public class MovimientoJugadora : MonoBehaviour
         {
             //float movimientoH = Input.GetAxisRaw("Horizontal");
 
-            //Movimiento con joystick
-            float movimientoH;
-            
+            //Direccion personaje
             if((joystick.Horizontal >= .2f) || (joystick.Horizontal <= -.2f))
                 movimientoH = joystick.Horizontal;
             else
@@ -250,7 +250,16 @@ public class MovimientoJugadora : MonoBehaviour
         //Control del disparo
         Shooting scriptShoot = ShootPrefab.GetComponent<Shooting>();
 
-        scriptShoot.Velocidad = System.Math.Abs(scriptShoot.Velocidad);
+        if (spRd.flipX == false)
+        {
+            //Ataque hacia la derecha
+            scriptShoot.Velocidad = System.Math.Abs(scriptShoot.Velocidad);
+        }
+        else if (spRd.flipX == true)
+        {
+            //Ataque hacia la izquierda
+            scriptShoot.Velocidad = -System.Math.Abs(scriptShoot.Velocidad);
+        }
 
         //Creamos una instancia del prefab en nuestra escena, concretamente en la posición de nuestro personaje
         Instantiate(ShootPrefab, transform.position, Quaternion.identity);
@@ -262,7 +271,6 @@ public class MovimientoJugadora : MonoBehaviour
         gameManager.TerminarJuego(false);
 
     }
-
 
     private void OnTriggerStay2D(Collider2D collider)
     {

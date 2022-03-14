@@ -8,6 +8,7 @@ TagManager:
   - Diamond
   - Enemigo
   - Meta
+  - Shoot
   layers:
   - Default
   - TransparentFX

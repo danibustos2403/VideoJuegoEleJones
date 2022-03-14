@@ -7,11 +7,11 @@ public class Shooting : MonoBehaviour
     public float Velocidad = 50.0F;
 
     //Variables privadas
-    private Rigidbody thisRigidbody;
+    private Rigidbody2D thisRigidbody;
 
     void Start()
     {
-        thisRigidbody = GetComponent<Rigidbody>();
+        thisRigidbody = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -19,9 +19,9 @@ public class Shooting : MonoBehaviour
         thisRigidbody.transform.Translate(new Vector3(Velocidad, 0, 0) * Time.deltaTime);
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Enemigo")
+        if (other.CompareTag("Enemigo"))
         {
             //Si el ataque colisiona contra un objeto con el tag 'Enemigo'
             other.gameObject.GetComponent<MovimientoDino>().DinoDisparado();
