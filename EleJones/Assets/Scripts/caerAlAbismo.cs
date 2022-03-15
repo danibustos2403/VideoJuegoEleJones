@@ -10,8 +10,13 @@ public class caerAlAbismo : MonoBehaviour
     {
         if (collider.CompareTag("Player"))
         {
-            gameManager = FindObjectOfType<GameManager>();
-            gameManager.TerminarJuego(false);
+            Invoke("morir", 0.5f);
         }
+    }
+
+    private void morir()
+    {
+        gameManager = FindObjectOfType<GameManager>();
+        gameManager.TerminarJuego(false);
     }
 }

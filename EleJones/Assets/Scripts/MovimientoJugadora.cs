@@ -34,8 +34,11 @@ public class MovimientoJugadora : MonoBehaviour
     //Movimiento con joystick
     private float movimientoH;
 
-    //Control boton acuchillar
+    //Control botón acuchillar
     private GameObject botonMelee;
+
+    //Control botón pistola
+    private GameObject botonShoot;
 
     //Control del disparo
     public GameObject ShootPrefab;
@@ -44,6 +47,8 @@ public class MovimientoJugadora : MonoBehaviour
     //Reproducción de audio
     public AudioClip saltoSfx;
     public AudioClip vidaSfx;
+    public AudioClip shootSfx;
+    public AudioClip knifeSfx;
     private AudioSource audioSource; //Quien lo reproduce
 
     //Este método se ejecuta antes del start cuando se crea la Escena
@@ -79,6 +84,9 @@ public class MovimientoJugadora : MonoBehaviour
 
         //Animación disparar
         isShooting = false;
+        botonShoot = GameObject.Find("BtnShoot");
+        if (!gameManager.tengoPistola)
+            botonShoot.SetActive(false);
     }
 
     // Update is called once per frame
@@ -177,7 +185,9 @@ public class MovimientoJugadora : MonoBehaviour
             {
                 isDead = true;
                 animator.SetBool("isDead", isDead);
+
                 Invoke("TerminarPartida", 2f);
+
             }
             else
             {
@@ -228,6 +238,9 @@ public class MovimientoJugadora : MonoBehaviour
         isMelee = true;
         animator.SetBool("isMelee", isMelee);
         Invoke("PararMelee", 0.5f);
+
+        //Reproducir audio de cuchillo
+        audioSource.PlayOneShot(knifeSfx);
     }
 
     //Boton salto
@@ -252,7 +265,9 @@ public class MovimientoJugadora : MonoBehaviour
         animator.SetBool("isShooting", isShooting);
         Invoke("PararShoot", 0.5f);
         Invoke("Disparar", 0.5f);
+
         
+
     }
 
     //Parar animacion disparar
@@ -280,11 +295,15 @@ public class MovimientoJugadora : MonoBehaviour
 
         //Creamos una instancia del prefab en nuestra escena, concretamente en la posición de nuestro personaje
         Instantiate(ShootPrefab, transform.position, Quaternion.identity);
+        
+        //Reproducir audio de disparo
+        audioSource.PlayOneShot(shootSfx);
     }
 
     //Terminar partida
     private void TerminarPartida()
     {
+        
         gameManager.TerminarJuego(false);
 
     }
@@ -295,6 +314,7 @@ public class MovimientoJugadora : MonoBehaviour
         {
             PlayerPrefs.SetInt("Gemas", gemas);
             gameManager.TerminarJuego(true);
+
         }
     }
 }

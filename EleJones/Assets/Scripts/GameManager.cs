@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public int starsLevel2 { get; set; }
     public int starsLevel3 { get; set; }
     public bool tengoCuchillo { get; set; }
+    public bool tengoPistola { get; set; }
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameManager);
         SceneManager.LoadScene("Menu");
         tengoCuchillo = false;
+        tengoPistola = false;
 
         starsLevel1 = 0;
         starsLevel2 = 0;

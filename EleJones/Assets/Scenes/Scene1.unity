@@ -277,7 +277,7 @@ GameObject:
   - component: {fileID: 152843424}
   - component: {fileID: 152843423}
   m_Layer: 5
-  m_Name: BtnMelee (1)
+  m_Name: BtnShoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -496,7 +496,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cantidad: 1
-  powerUpSfx: {fileID: 8300000, guid: ccb89eebc80ea42499ab6954227fa05f, type: 3}
+  powerUpSfx: {fileID: 8300000, guid: 676ca06f9e16fc44395137925d5ee1fc, type: 3}
 --- !u!61 &168044884
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1368,7 +1368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cantidad: 1
-  powerUpSfx: {fileID: 8300000, guid: ccb89eebc80ea42499ab6954227fa05f, type: 3}
+  powerUpSfx: {fileID: 8300000, guid: 676ca06f9e16fc44395137925d5ee1fc, type: 3}
 --- !u!61 &495969043
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1639,7 +1639,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cantidad: 1
-  powerUpSfx: {fileID: 8300000, guid: ccb89eebc80ea42499ab6954227fa05f, type: 3}
+  powerUpSfx: {fileID: 8300000, guid: 676ca06f9e16fc44395137925d5ee1fc, type: 3}
 --- !u!1 &589322600
 GameObject:
   m_ObjectHideFlags: 0
@@ -1687,6 +1687,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cantidad: 1
+  lifeSfx: {fileID: 8300000, guid: 676ca06f9e16fc44395137925d5ee1fc, type: 3}
 --- !u!58 &589322603
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1937,6 +1938,8 @@ MonoBehaviour:
   isShooting: 0
   saltoSfx: {fileID: 8300000, guid: ad3a0dd7be50e8043a8d30825f9f6846, type: 3}
   vidaSfx: {fileID: 8300000, guid: ab8f918b8e69d6649ab937489be411f3, type: 3}
+  shootSfx: {fileID: 8300000, guid: 5a4a7ee2acae062458f4461cc7f57611, type: 3}
+  knifeSfx: {fileID: 8300000, guid: 3bc7636047dbc8041a0e09ff0a6c0fb6, type: 3}
 --- !u!114 &645051196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2244,7 +2247,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 741152331}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 86.54, y: -19.84, z: 0}
+  m_LocalPosition: {x: 87.31, y: -19.49, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2598,6 +2601,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a85dcadceb230f4aafc23f5d2c9483b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chestSfx: {fileID: 8300000, guid: 84940641b4de47f408fc3b8b3712f982, type: 3}
 --- !u!61 &923886094
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12354,8 +12358,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -64, y: -36.2}
-  m_SizeDelta: {x: 90.1322, y: 22.86}
+  m_AnchoredPosition: {x: -22.2448, y: -36.199997}
+  m_SizeDelta: {x: 173.6426, y: 22.86}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1693386756
 MonoBehaviour:
@@ -12501,6 +12505,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cantidad: 1
+  lifeSfx: {fileID: 8300000, guid: 676ca06f9e16fc44395137925d5ee1fc, type: 3}
 --- !u!58 &1702234289
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -14061,6 +14066,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cantidad: 96
+  lifeSfx: {fileID: 8300000, guid: 676ca06f9e16fc44395137925d5ee1fc, type: 3}
 --- !u!58 &2110991336
 CircleCollider2D:
   m_ObjectHideFlags: 0
