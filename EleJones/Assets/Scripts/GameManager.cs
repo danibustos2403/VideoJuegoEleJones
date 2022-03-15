@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     {
         gameManager = GameObject.Find("GameManager");
         DontDestroyOnLoad(gameManager);
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("Presentation");
         tengoCuchillo = false;
         tengoPistola = false;
 
