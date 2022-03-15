@@ -19,7 +19,7 @@ public class YouLose : MonoBehaviour
 
         gameManager.inicializarVidas();
 
-        string PrevScene = PlayerPrefs.GetString("SceneNumber");
+        string PrevScene = PlayerPrefs.GetString("SceneName");
         SceneManager.LoadScene(PrevScene);
     }
 

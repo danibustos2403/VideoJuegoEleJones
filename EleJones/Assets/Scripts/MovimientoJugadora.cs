@@ -41,6 +41,17 @@ public class MovimientoJugadora : MonoBehaviour
     public GameObject ShootPrefab;
     public bool isShooting;
 
+    //Reproducción de audio
+    public AudioClip saltoSfx;
+    public AudioClip vidaSfx;
+    private AudioSource audioSource; //Quien lo reproduce
+
+    //Este método se ejecuta antes del start cuando se crea la Escena
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -173,6 +184,9 @@ public class MovimientoJugadora : MonoBehaviour
                 Invoke("HacerVulnerable", 1f);
                 spRd.color = Color.red;
             }
+
+            //Reproducir audio de vida
+            audioSource.PlayOneShot(vidaSfx);
         }
         //Actualizamos vidas del HUD
         hud.setVidasTxt(gameManager.getVidas());
@@ -224,6 +238,9 @@ public class MovimientoJugadora : MonoBehaviour
             rb2d.AddForce(Vector2.up * potenciaSalto);
             isJumping = true;
             animator.SetBool("isJumping", isJumping);
+
+            //Reproducir audio de salto
+            audioSource.PlayOneShot(saltoSfx);
         }
     }
 
