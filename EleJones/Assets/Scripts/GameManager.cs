@@ -21,9 +21,9 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Menu");
         tengoCuchillo = false;
 
-        starsLevel1 = -1;
-        starsLevel2 = -1;
-        starsLevel3 = -1;
+        starsLevel1 = 0;
+        starsLevel2 = 0;
+        starsLevel3 = 0;
     }
 
     public void cambiarEscena(string siguienteScene)
@@ -45,9 +45,9 @@ public class GameManager : MonoBehaviour
     {
         vidasGlobal--;
     }
-    public void aumentarVidas()
+    public void aumentarVidas(int cantidad)
     {
-        vidasGlobal++;
+        vidasGlobal += cantidad;
     }
 
     public void TerminarJuego(bool ganar)

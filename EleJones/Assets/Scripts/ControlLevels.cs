@@ -90,6 +90,22 @@ public class ControlLevels : MonoBehaviour
     {
         gameManager.inicializarVidas();
 
+        SceneManager.LoadScene("Scene1");
+        PlayerPrefs.SetString("SceneName", "Scene1");
+    }
+
+    public void OnButtonNivel2()
+    {
+        gameManager.inicializarVidas();
+
+        SceneManager.LoadScene("Scene2");
+        PlayerPrefs.SetString("SceneName", "Scene2");
+    }
+
+    public void OnButtonNivel3()
+    {
+        gameManager.inicializarVidas();
+
         SceneManager.LoadScene("Scene3");
         PlayerPrefs.SetString("SceneName", "Scene3");
     }

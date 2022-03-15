@@ -162,7 +162,7 @@ public class MovimientoJugadora : MonoBehaviour
 
     public void IncrementarVida(int cantidad)
     {
-        gameManager.aumentarVidas();
+        gameManager.aumentarVidas(cantidad);
         hud.setVidasTxt(gameManager.getVidas()); //Actualizamos vidas del HUD
     }
 
