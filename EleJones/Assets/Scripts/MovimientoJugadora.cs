@@ -265,9 +265,12 @@ public class MovimientoJugadora : MonoBehaviour
         animator.SetBool("isShooting", isShooting);
         Invoke("PararShoot", 0.5f);
         Invoke("Disparar", 0.5f);
+    }
 
-        
-
+    //Para activar la mecanica de la pistola
+    public void CogerPistola()
+    {
+        gameManager.tengoPistola = true;
     }
 
     //Parar animacion disparar
