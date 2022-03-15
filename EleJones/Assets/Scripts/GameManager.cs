@@ -23,9 +23,9 @@ public class GameManager : MonoBehaviour
         tengoCuchillo = false;
         tengoPistola = false;
 
-        starsLevel1 = 0;
-        starsLevel2 = 0;
-        starsLevel3 = 0;
+        starsLevel1 = -1;
+        starsLevel2 = -1;
+        starsLevel3 = -1;
     }
 
     public void cambiarEscena(string siguienteScene)

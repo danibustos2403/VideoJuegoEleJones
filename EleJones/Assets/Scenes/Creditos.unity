@@ -709,7 +709,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 16, y: -49}
+  m_AnchoredPosition: {x: -0.00096512, y: -61.581}
   m_SizeDelta: {x: 476.7746, y: 181.1006}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1077272153
@@ -782,7 +782,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 15.33653, y: -49.661995}
+  m_AnchoredPosition: {x: -0.00098133, y: -61.581}
   m_SizeDelta: {x: 441.0124, y: 155.9395}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1900729199
@@ -806,7 +806,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Juego creado en el m\xF3dulo Programaci\xF3n Multimedia y Dispositivos
-    M\xF3viles del ciclo de DAM.\n\nCentro: IES Maestre de Calatrava\nGameDev: nuestroGrupo@gmail.com\n\nVersi\xF3n:
+    M\xF3viles del ciclo de DAM\n\nCentro: IES Maestre de Calatrava\nGameDev: contact@elejones.es\n\nVersi\xF3n:
     2022.21"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
