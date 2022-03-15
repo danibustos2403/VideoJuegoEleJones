@@ -6,7 +6,7 @@ public class cofrePistola : MonoBehaviour
 {
     public AudioClip chestSfx;
     private GameManager gameManager;
-    private GameObject gameObject;
+    private Rigidbody2D rigidbody;
 
     void Start()
     {
@@ -25,10 +25,12 @@ public class cofrePistola : MonoBehaviour
 
             collision.GetComponent<AudioSource>().PlayOneShot(chestSfx);
 
+            rigidbody = GameObject.Find("Torre").GetComponent<Rigidbody2D>();
+            rigidbody.bodyType = RigidbodyType2D.Dynamic;
+            rigidbody = GameObject.Find("DecoracionTorre").GetComponent<Rigidbody2D>();
+            rigidbody.bodyType = RigidbodyType2D.Dynamic;
+
             Destroy(gameObject);
-
-
-            gameObject = GameObject.Find("Torre").GetComponent<RigidBody2D>;
         }
     }
 }
