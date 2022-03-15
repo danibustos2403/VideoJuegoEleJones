@@ -44,14 +44,14 @@ public class MovimientoDino : MonoBehaviour
             {
                 movimientoAFin = false;
                 //Verificamos si tenemos que girar
-                if (voltearse) spRd.flipX = false;
+                if (voltearse) spRd.flipX = !spRd.flipX;
             }
 
             if (transform.position == posicionInicio)
             {
                 movimientoAFin = true;
                 //Verificamos si tenemos que girar
-                if (voltearse) spRd.flipX = true;
+                if (voltearse) spRd.flipX = !spRd.flipX;
             }
         }
     }

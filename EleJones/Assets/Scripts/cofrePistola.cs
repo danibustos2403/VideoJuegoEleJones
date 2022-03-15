@@ -6,6 +6,7 @@ public class cofrePistola : MonoBehaviour
 {
     public AudioClip chestSfx;
     private GameManager gameManager;
+    private GameObject gameObject;
 
     void Start()
     {
@@ -25,6 +26,9 @@ public class cofrePistola : MonoBehaviour
             collision.GetComponent<AudioSource>().PlayOneShot(chestSfx);
 
             Destroy(gameObject);
+
+
+            gameObject = GameObject.Find("Torre").GetComponent<RigidBody2D>;
         }
     }
 }

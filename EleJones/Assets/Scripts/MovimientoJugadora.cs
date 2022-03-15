@@ -142,6 +142,9 @@ public class MovimientoJugadora : MonoBehaviour
             if (gameManager.tengoCuchillo)
                 botonMelee.SetActive(true);
 
+            if (gameManager.tengoPistola)
+                botonShoot.SetActive(true);
+
             /*
             //Para usar el cuchillo
             if (Input.GetButton("Fire1") && tengoCuchillo) //pulso la tecla CTRL
@@ -160,7 +163,7 @@ public class MovimientoJugadora : MonoBehaviour
     //Controlará la colisión contra el suelo, para los saltos
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Suelo"))
+        if (collision.gameObject.CompareTag("Suelo") || collision.gameObject.CompareTag("Torre"))
         {
             isJumping = false;
             rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
