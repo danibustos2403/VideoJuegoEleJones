@@ -16,6 +16,11 @@ public class ControlMenu : MonoBehaviour
         SceneManager.LoadScene("Creditos");
     }
 
+    public void OnButtonAgradecimientos()
+    {
+        SceneManager.LoadScene("Agradecimientos");
+    }
+
     public void OnButtonSalir()
     {
         Application.Quit(); //Sale del juego
