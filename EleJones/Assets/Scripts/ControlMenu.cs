@@ -30,4 +30,9 @@ public class ControlMenu : MonoBehaviour
     {
         SceneManager.LoadScene("Menu");
     }
+
+    public void BotonEnlace(string enlace)
+    {
+        Application.OpenURL(enlace);
+    }
 }
